@@ -13,7 +13,7 @@ ARG TARGETARCH
 
 RUN mkdir -p /app/backend
 
-RUN apk add --update caddy \
+RUN apk add --update caddy && \
     pip install -r https://raw.githubusercontent.com/caicaijiji/chatgpt-web-share/main/backend/requirements.txt
 
 COPY Caddyfile /app/Caddyfile
