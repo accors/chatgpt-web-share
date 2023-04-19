@@ -5,7 +5,6 @@ RUN apk add git && git clone https://github.com/acheong08/ChatGPT-Proxy-V4
 
 WORKDIR /app/ChatGPT-Proxy-V4
 RUN CGO_ENABLED=0 go build -a -installsuffix cgo .
-RUN npm install && npm run build
 
 FROM python:3.10-alpine
 
@@ -14,9 +13,8 @@ ARG TARGETARCH
 
 RUN mkdir -p /app/backend
 
-RUN apk add --update caddy
-
-RUN pip install -r https://raw.githubusercontent.com/caicaijiji/chatgpt-web-share/main/backend/requirements.txt
+RUN apk add --update caddy \
+    pip install -r https://raw.githubusercontent.com/caicaijiji/chatgpt-web-share/main/backend/requirements.txt
 
 COPY Caddyfile /app/Caddyfile
 COPY backend /app/backend
